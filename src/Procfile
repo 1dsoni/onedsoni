@@ -1,0 +1,1 @@
+web: gunicorn onedsoni.wsgi --log-file -

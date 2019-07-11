@@ -1,0 +1,98 @@
+<!doctype html>
+{% extends 'onedsoni/basic_page.html'%}
+{% load static %}
+
+  {% block basic_body_block %}
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Face Detection demo</h1>
+          <p class="lead text-muted">Here I've used opencv haarcascades, and dlib to process the image for face detection. Additionally facial features have also been marked by using dlib.</p>
+          <p>Enter image link here to perform face detection.</p>
+          <form method="POST" class="p-2">
+          <p>
+            <input type="text" name="url" value="" placeholder="image url here" >
+            <input type="submit" name="" value="submit" class="btn btn-primary btn-sm">
+          </p>
+          </form>
+        </div>
+      </section>
+
+      {% if opencv_results %}
+
+      <div class="py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+
+            <div class="  col-xs-12 col-sm-12 col-md-6">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{original_image}}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Original image used.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a class="btn btn-sm btn-outline-secondary" href="{{original_image}}">image url</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="  col-xs-12 col-sm-12 col-md-6">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{% static "/temp_marked/opencv_faces.jpg" %}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Opencv Face Detection.</p>
+                  <p class="card-text">Face count : {{opencv_results.num_faces}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="  col-xs-12 col-sm-12 col-md-6">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{% static "/temp_marked/dlib_faces.jpg" %}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Dlib Face Detection.</p>
+                  <p class="card-text">Face count : {{dlib_results.num_faces}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="  col-xs-12 col-sm-12 col-md-6">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{% static "/temp_marked/dlib_faces_with_features.jpg" %}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Dlib Facial Features Detection.</p>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <footer class="text-muted">
+        <div class="container">
+          <p class="float-right">
+            <a href="#">Back to top</a>
+          </p>
+        </div>
+      </footer>
+
+      {%endif%}
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-left">
+          <a href="http://www.diwanshusoni.me" target="_blank">diwanshusoni.me</a>
+        </p>
+      </div>
+    </footer>
+
+{% endblock%}
