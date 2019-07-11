@@ -3,10 +3,10 @@ import os
 DEBUG = False
 ALLOWED_HOSTS = ['127.0.0.1']
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'asdasdashkdghghg7689769uig')
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+        default=os.environ.get('DATABASE_URL')
     )
 }
 
