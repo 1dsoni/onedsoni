@@ -109,8 +109,8 @@ class OPENCV_HELPER:
             self.marked_image = IMAGE_HELPER.get_faces_marked(image=self.image,
                                                     faces=self.facial_points,
                                                     is_opencv = True)
-            self.marked_image_loc = IMAGE_HELPER.save_image_in_static(
-                                        self.marked_image, 'opencv_faces.jpg')
+            self.marked_image_loc = "\""+IMAGE_HELPER.save_image_in_static(
+                                        self.marked_image, 'opencv_faces.jpg')+"\""
 
     def get_faces(self,scaleFactor = 1.1,minNeighbors = 5,
                     minSize = (30,30),flags = cv2.CASCADE_SCALE_IMAGE  ):

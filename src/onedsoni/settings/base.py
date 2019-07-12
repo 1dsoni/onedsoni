@@ -14,9 +14,24 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PRE_TRAINED_MODELS_DIR = os.path.join(BASE_DIR, 'image_toolkit/pre_trained_models')
-SAVE_IMAGES_DIR = os.path.join( BASE_DIR, 'image_toolkit/static/temp_marked')
 TEMPLATES_DIR = os.path.join( BASE_DIR, 'templates')
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'image_toolkit/static'),
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+SAVE_IMAGES_DIR = MEDIA_ROOT
+MEDIAFILES_DIRS = (
+    os.path.join(BASE_DIR, 'media'),
+)
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
@@ -31,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,8 +106,5 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #myadded

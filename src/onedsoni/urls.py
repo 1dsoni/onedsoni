@@ -22,3 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.image_toolkit_view),
 ]
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from onedsoni.settings.base import MEDIA_URL, MEDIA_ROOT
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)

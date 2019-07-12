@@ -31,7 +31,7 @@
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="{{original_image}}" alt="Card image cap">
                 <div class="card-body">
-                  <p class="card-text">Original image used.{{opencv_results.marked_image_loc}}</p>
+                  <p class="card-text">Original image used.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a class="btn btn-sm btn-outline-secondary" href="{{original_image}}">image url</a>
@@ -43,7 +43,7 @@
 
             <div class="  col-xs-12 col-sm-12 col-md-6">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{% static "temp_marked/opencv_faces.jpg" %}" alt="Card image cap">
+                <img class="card-img-top" src="media/opencv_faces.jpg" alt="Couldn't load">
                 <div class="card-body">
                   <p class="card-text">Opencv Face Detection.</p>
                   <p class="card-text">Face count : {{opencv_results.num_faces}}</p>
@@ -53,7 +53,7 @@
 
             <div class="  col-xs-12 col-sm-12 col-md-6">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{% static "temp_marked/dlib_faces.jpg" %}" alt="Card image cap">
+                <img class="card-img-top" src="media/dlib_faces.jpg" alt="Couldn't load">
                 <div class="card-body">
                   <p class="card-text">Dlib Face Detection.</p>
                   <p class="card-text">Face count : {{dlib_results.num_faces}}</p>
@@ -63,13 +63,12 @@
 
             <div class="  col-xs-12 col-sm-12 col-md-6">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{% static "temp_marked/dlib_faces_with_features.jpg" %}" alt="Card image cap">
+                <img class="card-img-top" src="/media/dlib_faces_with_features.jpg" alt="Couldn't load">
                 <div class="card-body">
                   <p class="card-text">Dlib Facial Features Detection.</p>
                 </div>
               </div>
             </div>
-
 
           </div>
         </div>

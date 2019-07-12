@@ -1,5 +1,3 @@
-
-
 from .base import *
 import os
 import dj_database_url
@@ -13,20 +11,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', '03l%&8d(%j)pu_pvy$@s!m1rm&6rq_^=ui!*c&7=e(
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'asdasdashkdghghg7689769uig'),
+        default=os.getenv('DATABASE_URL', ''),
     )
 }
 # DATABASES['default']['CONN_MAX_AGE'] = 500
-
-# Static assets
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, 'image_toolkit/static'),
-   ]
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-# User uploads
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 
 if not DEBUG:
     CORS_REPLACE_HTTPS_REFERER      = True
@@ -48,9 +36,6 @@ else :
     SECURE_HSTS_SECONDS             = None
     SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
     SECURE_FRAME_DENY               = False
-
-# # add this
-
 
 # import os
 # import json
