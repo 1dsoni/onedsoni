@@ -17,9 +17,6 @@ PRE_TRAINED_MODELS_DIR = os.path.join(BASE_DIR, 'image_toolkit/pre_trained_model
 SAVE_IMAGES_DIR = os.path.join( BASE_DIR, 'image_toolkit/static/temp_marked')
 TEMPLATES = os.path.join( BASE_DIR, 'templates')
 
-
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [

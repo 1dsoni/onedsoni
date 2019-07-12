@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
-import urllib
+import urllib.request
 import cv2
 import numpy as np
 from dlib import get_frontal_face_detector, shape_predictor

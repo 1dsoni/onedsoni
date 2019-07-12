@@ -1,14 +1,22 @@
+import dj_database_url
+db_from_env = dj_database_url.config()
+# DATABASES['default'].update(db_from_env)
+
 from .base import *
 import os
-DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1']
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'asdasdashkdghghg7689769uig')
+DEBUG = os.getenv('DEBUG', False) == 'True'
+# DEBUG = True
+ALLOWED_HOSTS = ['onedsoni.herokuapp.com',]
+
+SECRET_KEY = os.getenv('SECRET_KEY', 'asdasdashkdghghg7689769uig')
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
+        default=os.getenv('DATABASE_URL', 'asdasdashkdghghg7689769uig'),
     )
 }
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Static assets
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -31,11 +39,8 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
 SECURE_HSTS_SECONDS             = 1000000
 SECURE_FRAME_DENY               = True
 
-# add this
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-DATABASES['default']['CONN_MAX_AGE'] = 500
+# # add this
+
 
 # import os
 # import json

@@ -19,6 +19,6 @@ from django.urls import path
 from image_toolkit import views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', views.image_toolkit_view),
 ]
