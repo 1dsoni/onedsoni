@@ -95,4 +95,3 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #myadded
-LOGGING_DIR = os.path.join(BASE_DIR, "logs")
