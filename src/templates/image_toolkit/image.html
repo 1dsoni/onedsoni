@@ -29,7 +29,7 @@
 
             <div class="  col-xs-12 col-sm-12 col-md-6">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{original_image}}" alt="Card image cap">
+                <img class="card-img-top" src="{{original_image}}" alt="Card image cap" >
                 <div class="card-body">
                   <p class="card-text">Original image used.</p>
                   <div class="d-flex justify-content-between align-items-center">
@@ -41,22 +41,25 @@
               </div>
             </div>
 
+            {% if opencv_results.num_faces > 0%}
             <div class="  col-xs-12 col-sm-12 col-md-6">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="media/opencv_faces.jpg" alt="Couldn't load">
                 <div class="card-body">
                   <p class="card-text">Opencv Face Detection.</p>
-                  <p class="card-text">Face count : {{opencv_results.num_faces}}</p>
+                  <p class="card-text">cv2:I think there are {{opencv_results.num_faces}} people in this image.</p>
                 </div>
               </div>
             </div>
+            {%endif%}
 
+            {%if dlib_results.num_faces > 0%}
             <div class="  col-xs-12 col-sm-12 col-md-6">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="media/dlib_faces.jpg" alt="Couldn't load">
                 <div class="card-body">
                   <p class="card-text">Dlib Face Detection.</p>
-                  <p class="card-text">Face count : {{dlib_results.num_faces}}</p>
+                  <p class="card-text">dlib : hey i can see about {{dlib_results.num_faces}} faces here.</p>
                 </div>
               </div>
             </div>
@@ -66,9 +69,14 @@
                 <img class="card-img-top" src="/media/dlib_faces_with_features.jpg" alt="Couldn't load">
                 <div class="card-body">
                   <p class="card-text">Dlib Facial Features Detection.</p>
+                  <!-- <p class="card-text">
+                    <p>{{dlib_results.smiling_explained}}</p>
+                    <p>{{dlib_results.smiling_people}}</p>
+                  </p> -->
                 </div>
               </div>
             </div>
+            {%endif%}
 
           </div>
         </div>

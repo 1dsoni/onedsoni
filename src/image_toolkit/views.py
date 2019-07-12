@@ -51,9 +51,15 @@ def image_toolkit_view( request):
                             'faces':str( img_cv_obj.facial_points),
                             'marked_image_loc':img_cv_obj.marked_image_loc,}
 
+            smiling_people = [ str(features['face_number']) for features in img_dlib_obj.facial_features_list if features.get('is_smiling',0) == 1]
+            smiling_explained =  'Maybe about {} people are Smiling here.'.format(len(smiling_people))
+            smiling_people = ' '.join( smiling_people)
+            smiling_people = 'Smiling faces are numbered : {}.'.format(smiling_people)
             dlib_results = { 'num_faces':img_dlib_obj.num_faces,
                         'faces':str( img_dlib_obj.facial_points),
-                        'marked_image_loc':img_dlib_obj.marked_image_loc,}
+                        'marked_image_loc':img_dlib_obj.marked_image_loc,
+                        'smiling_explained':smiling_explained,
+                        'smiling_people':smiling_people}
 
             context = { 'original_image':url,
                         'opencv_results':opencv_results,

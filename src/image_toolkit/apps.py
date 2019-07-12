@@ -38,17 +38,21 @@ class IMAGE_HELPER:
         temp_image = np.copy( image )
         if len(faces) > 0:
             if is_opencv:
-                for x,y,w,h in faces:
+                for index, (x,y,w,h) in enumerate(faces):
                     cv2.rectangle( temp_image, (x, y), (x+w, y+h),
                                     color, line_width)
+                    cv2.putText(temp_image, str(index + 1), (x, y),
+			                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
             else :
-                for face in faces:
+                for index,face in enumerate(faces):
                     x = face.left()
                     y = face.top()
                     x2 = face.right()
                     y2 = face.bottom()
                     cv2.rectangle( temp_image, (x, y), (x2, y2),
                                         color, line_width)
+                    cv2.putText(temp_image, str(index + 1), (x, y),
+			                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
             return temp_image
         else:
             return None
@@ -109,8 +113,8 @@ class OPENCV_HELPER:
             self.marked_image = IMAGE_HELPER.get_faces_marked(image=self.image,
                                                     faces=self.facial_points,
                                                     is_opencv = True)
-            self.marked_image_loc = "\""+IMAGE_HELPER.save_image_in_static(
-                                        self.marked_image, 'opencv_faces.jpg')+"\""
+            self.marked_image_loc = IMAGE_HELPER.save_image_in_static(
+                                        self.marked_image, 'opencv_faces.jpg')
 
     def get_faces(self,scaleFactor = 1.1,minNeighbors = 5,
                     minSize = (30,30),flags = cv2.CASCADE_SCALE_IMAGE  ):
@@ -176,7 +180,7 @@ class DLIB_HELPER:
             self.marked_image = IMAGE_HELPER.get_faces_marked(image=self.image,
                                                     faces=self.facial_points,
                                                     is_opencv = False)
-            # self.facial_features_of_image = self.get_facial_features()
+            self.facial_features_list = self.get_facial_features()
 
             self.get_facial_features_marked() #self.feature_marked_image
 
@@ -190,6 +194,7 @@ class DLIB_HELPER:
         for i in range(0,68):
             xy[i] = ( shape.part(i).x, shape.part(i).y )
         return xy
+
     def get_facial_features_marked(self, color=(0,255,0), radius = 2):
         self.feature_marked_image = np.copy( self.image)
         full_features = []
@@ -213,7 +218,7 @@ class DLIB_HELPER:
         return send_data
 
     def get_facial_features(self):
-        self.facial_features = list()
+        self.facial_features_list = list()
         for index, face in enumerate(self.facial_points):
             x = face.left()
             y = face.top()
@@ -230,12 +235,26 @@ class DLIB_HELPER:
             mouth_outer = landmarks[DLIB_HELPER.MOUTH_OUTLINE_POINTS]
             mouth_inner = landmarks[DLIB_HELPER.MOUTH_INNER_POINTS]
             jawline = landmarks[DLIB_HELPER.JAWLINE_POINTS]
-            self.facial_features.append({'full_features':full_features, 'face':face,
+            smiling = self.is_smiling(mouth_outer)
+            self.facial_features_list.append({'full_features':full_features, 'face':face,
                     'left_eyebrow':left_eyebrow, 'right_eyebrow':right_eyebrow,
                     'left_eye':left_eye, 'right_eye': right_eye, 'nose':nose,
                     'mouth_outer':mouth_outer, 'mouth_inner':mouth_inner,
-                    'jawline':jawline, 'face_number':index})
-        return self.facial_features
+                    'jawline':jawline, 'face_number':(index + 1), 'is_smiling': smiling})
+        return self.facial_features_list
+
+    def is_smiling(self, mouth):
+        p1 = dist.euclidean(mouth[3], mouth[9])
+        p2 = dist.euclidean(mouth[2], mouth[10])
+        p3 = dist.euclidean(mouth[4], mouth[8])
+        avg_vertical_ = (p1+p2+p3)/3
+        horizontal_ = dist.euclidean(mouth[0], mouth[6])
+        ratio=avg_vertical_/horizontal_
+        if ratio < .37 and ratio > .3:
+            return 1
+        else:
+            return 0
+        # return ratio
 
     def mouth_size(self, mouth):
         mouthWidth = dist.euclidean(mouth[0], mouth[-1])
