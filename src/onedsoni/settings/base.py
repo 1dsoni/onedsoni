@@ -15,7 +15,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PRE_TRAINED_MODELS_DIR = os.path.join(BASE_DIR, 'image_toolkit/pre_trained_models')
 SAVE_IMAGES_DIR = os.path.join( BASE_DIR, 'image_toolkit/static/temp_marked')
-TEMPLATES = os.path.join( BASE_DIR, 'templates')
+TEMPLATES_DIR = os.path.join( BASE_DIR, 'templates')
 
 ALLOWED_HOSTS = []
 
@@ -44,7 +44,7 @@ ROOT_URLCONF = 'onedsoni.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES,],
+        'DIRS': [TEMPLATES_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
