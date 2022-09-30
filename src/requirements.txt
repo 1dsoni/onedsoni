@@ -9,7 +9,7 @@ Django==2.2.3
 dlib==19.17.0
 gunicorn==19.9.0
 idna==2.8
-joblib==0.13.2
+joblib==1.2.0
 jsonschema==3.0.1
 murmurhash==1.0.2
 numpy==1.16.2
